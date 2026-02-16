@@ -60,7 +60,7 @@ jQuery(document).ready(function($) {
         }
     });
 
-    function mrkvBOCinitIntlTelInput(selector, defaultCountry = "ua") {
+    function mrkvBOCinitIntlTelInput(selector, defaultCountry = "us") {
         var input = document.querySelector(selector);
         if (input) {
             var iti = window.intlTelInput(input, {
@@ -133,5 +133,5 @@ jQuery(document).ready(function($) {
     }
 
     
-    mrkvBOCinitIntlTelInput("#mrkv_buy-one-click__phone");
+    mrkvBOCinitIntlTelInput("#mrkv_buy-one-click__phone", mrkv_buy_one_click_helper.default_country);
 });

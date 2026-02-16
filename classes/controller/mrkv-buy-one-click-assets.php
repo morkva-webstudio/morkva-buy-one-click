@@ -81,8 +81,18 @@ if (!class_exists('MRKV_BUY_ONE_CLICK_FRONT_ASSETS'))
 					    }
 					";
 
+					$country = WC()->countries->get_base_country();
+
+					if (!$country) {
+					    $country = 'US';
+					}
+
+					$country = strtolower(substr($country, 0, 2));
+
+
 					$args = array(
-			        	'ajax_url' => admin_url( 'admin-ajax.php' ), 
+			        	'ajax_url' => admin_url( 'admin-ajax.php' ),
+			        	'default_country' => $country,
 			        	'nonce'    => wp_create_nonce('mrkv_buy_one_click_nonce')
 			        );
 

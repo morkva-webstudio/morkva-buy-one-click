@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Morkva quick order button
  * Description: Add a quick "Buy in One Click" button to your WooCommerce product pages. Let customers place orders instantly with minimal steps.
- * Version: 0.2.5
+ * Version: 0.2.6
  * Tested up to: 6.9
  * Requires at least: 5.2
  * Requires PHP: 7.4
