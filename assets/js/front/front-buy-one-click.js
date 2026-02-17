@@ -26,16 +26,11 @@ jQuery(document).ready(function($) {
                     phone: phone,
                     nonce: mrkv_buy_one_click_helper.nonce,
                 },
-                success: function (json) {
-                    var data = JSON.parse(json);
-                    
-                    if(data.order_number)
-                    {
-                        jQuery('.mrkv_buy-one-click__order_number').text(data.order_number);
-                    }
-                    else if(data.message)
-                    {
-                        jQuery('.mrkv_buy-one-click__form__inner__result h2').html(data.message);
+                success: function (data) {
+                    if (data.success && data.data.order_number) {
+                        jQuery('.mrkv_buy-one-click__order_number').text(data.data.order_number);
+                    } else if (data.data && data.data.message) {
+                        jQuery('.mrkv_buy-one-click__form__inner__result h2').html(data.data.message);
                     }
 
                     jQuery('.mrkv_buy-one-click__form__inner__result').show();

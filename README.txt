@@ -4,7 +4,7 @@ Tags: buy now, one click checkout, quick order
 Requires at least: 5.8
 Tested up to: 6.9.0
 Requires PHP: 7.4
-Stable tag: 0.2.6
+Stable tag: 0.2.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,9 @@ Basic customization (text and labels) is available in free. Full **style control
 
 == Changelog ==
 
+= 0.2.7 =
+* WOO 10.5.0 - compatible
+
 = 0.2.6 =
 * [new] added default country selection for numbers from WooCommerce settings.
 * [fix] fixed the display of the button in the after_add_to_cart_button hook.
@@ -73,7 +76,7 @@ Basic customization (text and labels) is available in free. Full **style control
 * [fix] fixed settings field
 
 = 0.2.4 =
-* WP 6.9 - сумісний
+* WP 6.9 - compatible
 
 = 0.2.3 =
 * [fix] change order creator function

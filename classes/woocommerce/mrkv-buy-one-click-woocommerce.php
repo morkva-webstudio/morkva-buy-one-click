@@ -56,11 +56,15 @@ if (!class_exists('MRKV_BUY_ONE_CLICK_WOOCOMMERCE'))
     			$order->set_status( $order_status );
     			$order_id = $order->save();
 
-		    	WC()->mailer()->emails['WC_Email_New_Order']->trigger($order_id);
+		    	if ( $order_id && WC()->mailer() && isset( WC()->mailer()->emails['WC_Email_New_Order'] ) ) {
+			    	WC()->mailer()->emails['WC_Email_New_Order']->trigger( $order_id );
+			    }
 
-			    echo json_encode(array(
-			    	'order_number' => $order->get_id()
-			    ));
+			    wp_send_json_success(
+			    	array(
+			    		'order_number' => $order->get_id()
+			    	)
+			    );
 		    }
 
 		    wp_die();
