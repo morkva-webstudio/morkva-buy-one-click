@@ -35,12 +35,22 @@ if (!class_exists('MRKV_BUY_ONE_CLICK_WOOCOMMERCE'))
 		    $product_id = isset($_POST['product_id']) ? sanitize_text_field(wp_unslash($_POST['product_id'])) : '';
 		    $first_name = isset($_POST['first_name']) ? sanitize_text_field(wp_unslash($_POST['first_name'])) : '';
 		    $phone = isset($_POST['phone']) ? '380' . sanitize_text_field(wp_unslash($_POST['phone'])) : '';
+		    $is_quote_request = isset($_POST['is_quote']) && $_POST['is_quote'] === '1';
 
 		    $product = wc_get_product( $product_id );
 
 		    $settings_data = get_option('mrkv_buy_one_settings');
 			$is_active_show = isset($settings_data['enabled']) ? $settings_data['enabled'] : '';
 			$order_status = 'on-hold';
+
+			# Server-side trust-but-verify: quote-mode needs the toggle on and a
+			# simple product with an empty price (JS spoofing is ignored).
+			$is_quote_mode = $is_quote_request
+				&& !empty($settings_data['quote']['enabled'])
+				&& $settings_data['quote']['enabled'] === 'on'
+				&& $product instanceof WC_Product
+				&& $product->is_type('simple')
+				&& $product->get_price() === '';
 
 		    if($is_active_show && $product && $first_name && $phone)
 		    {
@@ -53,6 +63,14 @@ if (!class_exists('MRKV_BUY_ONE_CLICK_WOOCOMMERCE'))
 			    $order->set_billing_first_name( sanitize_text_field( $first_name ) );
     			$order->set_billing_phone( sanitize_text_field( $phone ) );
     			$order->calculate_totals();
+
+    			if ( $is_quote_mode ) {
+    				$order->update_meta_data( '_mrkv_is_quote_request', 'yes' );
+    				$order->add_order_note(
+    					__( 'Quote request — product has no price; customer wants a quote.', 'morkva-buy-one-click' )
+    				);
+    			}
+
     			$order->set_status( $order_status );
     			$order_id = $order->save();
 
@@ -73,10 +91,36 @@ if (!class_exists('MRKV_BUY_ONE_CLICK_WOOCOMMERCE'))
 		public function mrkv_buy_one_click_summary_add_btn()
 		{
 			$settings_data = get_option('mrkv_buy_one_settings');
+			$position = isset($settings_data['position']) ? $settings_data['position'] : '';
 
-		    if ( isset($settings_data['position']) && $settings_data['position'] === 'after_add_to_cart_button' ) {
-		        echo do_shortcode('[mrkv_buy_one_click]');
-		    }
+			if ( $position === 'after_add_to_cart_button' ) {
+				echo do_shortcode('[mrkv_buy_one_click]');
+				return;
+			}
+
+			# Quote-mode fallback for the in-form position: an empty-price simple
+			# product makes WC drop the add-to-cart form, so the primary hook
+			# `woocommerce_after_add_to_cart_button` never fires. Render here.
+			if ( $position !== 'after_add_to_cart_button_main' ) {
+				return;
+			}
+
+			if ( empty($settings_data['quote']['enabled']) || $settings_data['quote']['enabled'] !== 'on' ) {
+				return;
+			}
+
+			global $product;
+			if ( ! $product instanceof WC_Product || ! $product->is_type('simple') || $product->get_price() !== '' ) {
+				return;
+			}
+
+			# If the form still renders (product purchasable), the primary hook
+			# will fire — avoid a double-render here.
+			if ( $product->is_purchasable() ) {
+				return;
+			}
+
+			echo do_shortcode('[mrkv_buy_one_click]');
 		}
 
 		public function mrkv_buy_one_click__add_btn()

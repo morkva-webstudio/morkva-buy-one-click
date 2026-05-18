@@ -45,6 +45,42 @@
 			</div>
 		</div>
 	</div>
+	<h3><img src="<?php echo esc_url(MRKV_BUY_ONE_CLICK_PLUGIN_URL . 'assets/images/question-icon.svg'); ?>" alt="Request a Quote" title="Request a Quote"><?php echo esc_html__('Request a Quote', 'morkva-buy-one-click'); ?></h3>
+	<p><?php echo esc_html__('When a simple product has no price, switch the button to «Request a Quote» mode.', 'morkva-buy-one-click'); ?></p>
+	<hr class="mrkv-ua-ship__hr">
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php
+					$data = isset($settings_data['quote']['enabled']) ? $settings_data['quote']['enabled'] : '';
+					echo wp_kses($field_creator->get_input_checkbox(esc_html__('Enable Request a Quote mode', 'morkva-buy-one-click'), $settings_slug . '[quote][enabled]', $data, $settings_slug . '_quote_enabled'), $allowed_tags);
+				?>
+				<p class="mrkv-ua-ship-description">
+					<?php echo esc_html__('Triggers on simple products that have no price.', 'morkva-buy-one-click'); ?>
+				</p>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php
+					$data = isset($settings_data['quote']['btn_front']) ? $settings_data['quote']['btn_front'] : '';
+					echo wp_kses($field_creator->get_input_text(esc_html__('Open button text (Default: Get a quote)', 'morkva-buy-one-click'), $settings_slug . '[quote][btn_front]', $data, $settings_slug . '_quote_btn_front', '', esc_html__('Get a quote', 'morkva-buy-one-click'), ''), $allowed_tags);
+				?>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php
+					$data = isset($settings_data['quote']['button']) ? $settings_data['quote']['button'] : '';
+					echo wp_kses($field_creator->get_input_text(esc_html__('Submit button text (Default: Send request)', 'morkva-buy-one-click'), $settings_slug . '[quote][button]', $data, $settings_slug . '_quote_button', '', esc_html__('Send request', 'morkva-buy-one-click'), ''), $allowed_tags);
+				?>
+			</div>
+		</div>
+	</div>
 	<h3><img src="<?php echo esc_url(MRKV_BUY_ONE_CLICK_PLUGIN_URL . 'assets/images/clapperboard-edit-icon.svg'); ?>" alt="Form content" title="Form content"><?php echo esc_html__('Form content', 'morkva-buy-one-click'); ?></h3>
 	<p><?php echo esc_html__('Introduce additional content to your form', 'morkva-buy-one-click'); ?></p>
 	<hr class="mrkv-ua-ship__hr">

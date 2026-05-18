@@ -13,6 +13,7 @@ jQuery(document).ready(function($) {
         let product_id = jQuery('.mrkv_buy-one-click__product-data').attr('data-prod-id');
         let first_name = jQuery('#mrkv_buy-one-click__username').val();
         let phone = jQuery('#mrkv_buy-one-click__phone').val();
+        let is_quote = jQuery('#mrkv_buy-one-click__is_quote').val() === '1' ? 1 : 0;
 
         if(product_id && first_name && phone)
         {
@@ -24,6 +25,7 @@ jQuery(document).ready(function($) {
                     product_id: product_id,
                     first_name: first_name,
                     phone: phone,
+                    is_quote: is_quote,
                     nonce: mrkv_buy_one_click_helper.nonce,
                 },
                 success: function (data) {

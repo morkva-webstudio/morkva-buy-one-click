@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Morkva Buy One Click\n"
+"Project-Id-Version: morkva quick order button\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-25 04:47+0000\n"
+"POT-Creation-Date: 2026-05-16 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -18,8 +18,8 @@ msgstr ""
 
 #. Description of the plugin
 msgid ""
-"Add a quick \"Buy in One Click\" button to your WooCommerce product pages. "
-"Let customers place orders instantly with minimal steps."
+"Add a quick order button to WooCommerce product pages. Customers send a "
+"short form, your manager gets the order — no cart needed."
 msgstr ""
 
 #: classes/settings/admin/mrkv-buy-one-click-menu.php:55
@@ -144,15 +144,12 @@ msgid "Label Font size"
 msgstr ""
 
 #. Author of the plugin
-msgid "MORKVA"
+msgid "morkva"
 msgstr ""
 
 #. Name of the plugin
-msgid "Morkva Buy One Click"
-msgstr ""
-
 #: classes/settings/admin/mrkv-buy-one-click-menu.php:34
-msgid "MRKV Buy One Click"
+msgid "morkva quick order button"
 msgstr ""
 
 #: templates/settings/template-buy-one-click-sections.php:34
@@ -256,6 +253,46 @@ msgstr ""
 
 #: templates/settings/template-buy-one-click-sections.php:246
 msgid "Title Font size"
+msgstr ""
+
+#: templates/settings/template-buy-one-click-sections.php:56
+msgid "Enable Request a Quote mode"
+msgstr ""
+
+#: classes/controller/mrkv-buy-one-click-shortcodes.php:67
+#: templates/settings/template-buy-one-click-sections.php:71
+msgid "Get a quote"
+msgstr ""
+
+#: templates/settings/template-buy-one-click-sections.php:71
+msgid "Open button text (Default: Get a quote)"
+msgstr ""
+
+#: classes/woocommerce/mrkv-buy-one-click-woocommerce.php:70
+msgid "Quote request — product has no price; customer wants a quote."
+msgstr ""
+
+#: templates/settings/template-buy-one-click-sections.php:48
+msgid "Request a Quote"
+msgstr ""
+
+#: classes/controller/mrkv-buy-one-click-shortcodes.php:107
+#: templates/settings/template-buy-one-click-sections.php:79
+msgid "Send request"
+msgstr ""
+
+#: templates/settings/template-buy-one-click-sections.php:79
+msgid "Submit button text (Default: Send request)"
+msgstr ""
+
+#: templates/settings/template-buy-one-click-sections.php:59
+msgid "Triggers on simple products that have no price."
+msgstr ""
+
+#: templates/settings/template-buy-one-click-sections.php:49
+msgid ""
+"When a simple product has no price, switch the button to «Request a Quote» "
+"mode."
 msgstr ""
 
 #: templates/settings/template-buy-one-click-sections.php:124

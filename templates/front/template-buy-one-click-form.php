@@ -1,5 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
-<div class="mrkv_buy-one-click__form">
+<?php $is_quote_mode = !empty($is_quote_mode); ?>
+<div class="mrkv_buy-one-click__form<?php echo $is_quote_mode ? ' mrkv_buy-one-click--quote' : ''; ?>">
 	<div class="mrkv_buy-one-click__overlay"></div>
 	<div class="mrkv_buy-one-click__form__inner">
 		<div class="mrkv_buy-one-click__close_form">
@@ -18,6 +19,7 @@
 				<label for="mrkv_buy-one-click__phone"><?php echo esc_html__( 'Phone', 'morkva-buy-one-click' ); ?></label>
 				<input id="mrkv_buy-one-click__phone" placeholder="+380" name="mrkv_buy-one-click__phone" type="tel">
 			</div>
+			<input type="hidden" id="mrkv_buy-one-click__is_quote" value="<?php echo $is_quote_mode ? '1' : '0'; ?>">
 			<div data-prod-id="<?php echo esc_attr($product_id); ?>" class="mrkv_buy-one-click__product-data"></div>
 			<p class="mrkv_buy-one-click__above_btn"><?php echo esc_html($before_btn_text); ?></p>
 			<?php do_action('mrkv_buy_one_click_before_create_btn'); ?>
