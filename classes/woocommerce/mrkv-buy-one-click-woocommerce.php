@@ -62,6 +62,11 @@ if (!class_exists('MRKV_BUY_ONE_CLICK_WOOCOMMERCE'))
 			    $order->add_product( $product, 1 );
 			    $order->set_billing_first_name( sanitize_text_field( $first_name ) );
     			$order->set_billing_phone( sanitize_text_field( $phone ) );
+    			# Fields the checkout would set: order origin, account link, IP/UA (Meta CAPI matching)
+    			$order->set_created_via( 'buy_one_click' );
+    			$order->set_customer_id( get_current_user_id() );
+    			$order->set_customer_ip_address( WC_Geolocation::get_ip_address() );
+    			$order->set_customer_user_agent( wc_get_user_agent() );
     			$order->calculate_totals();
 
     			if ( $is_quote_mode ) {
@@ -73,6 +78,8 @@ if (!class_exists('MRKV_BUY_ONE_CLICK_WOOCOMMERCE'))
 
     			$order->set_status( $order_status );
     			$order_id = $order->save();
+
+				do_action( 'mrkv_buy_one_click_order_created', $order_id, $product_id );
 
 		    	if ( $order_id && WC()->mailer() && isset( WC()->mailer()->emails['WC_Email_New_Order'] ) ) {
 			    	WC()->mailer()->emails['WC_Email_New_Order']->trigger( $order_id );
