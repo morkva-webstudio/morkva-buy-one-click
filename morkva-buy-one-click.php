@@ -5,11 +5,12 @@
  * Version: 0.3.0
  * Requires at least: 5.2
  * Requires PHP: 7.4
+ * Tested up to: 7.1
  * Author: bandido
  * Author URI: https://morkva.co.ua
  * Text Domain: morkva-buy-one-click
  * WC requires at least: 5.4.0
- * WC tested up to: 10.5.0
+ * WC tested up to: 11.3
  * Domain Path: /i18n/
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
